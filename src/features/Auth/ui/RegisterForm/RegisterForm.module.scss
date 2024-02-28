@@ -1,0 +1,59 @@
+.auth {
+   margin-top: 50px;
+   max-width: 380px;
+   width: 100%;
+}
+
+.authTop {
+   border: 1px solid var(--border);
+   padding: 30px;
+   background: var(--main-color-body);
+   min-height: 692px;
+   position: relative;
+   transition: all 0.5s ease;
+
+   button{
+      margin-top: 15px;
+   }
+
+   .formError {
+      position: absolute;
+      bottom: 95px;
+      left: 52px;
+   }
+}
+
+
+
+.authBottom {
+   border: 1px solid var(--border);
+   padding: 30px 17px;
+   max-width: 380px;
+   background: var(--main-color-body);
+}
+
+.form {
+   margin-top: 50px;
+}
+
+.logo {
+   margin-bottom: 20px;
+}
+
+.formTop {
+   margin-bottom: -20px;
+
+   span {
+      width: 190px;
+      text-align: center;
+      letter-spacing: -0.1px;
+   }
+}
+
+.desc {
+   text-align: center;
+}
+
+.dark {
+   filter: invert(100%);
+}
