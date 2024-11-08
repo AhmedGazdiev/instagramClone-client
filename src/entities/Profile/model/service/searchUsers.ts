@@ -3,25 +3,27 @@ import { User } from '@/entities/User'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface SearchUsersParams {
-   search: string
+	search: string
 }
 
 interface getFetchSearchUsers {
-   users: User[]
+	users: User[]
 }
 
-export const searchUsers = createAsyncThunk<any, SearchUsersParams, ThunkConfig>(
-   'profile/searchUsers',
-   async ({ search }, thunkApi) => {
-      const { rejectWithValue, extra } = thunkApi
+export const searchUsers = createAsyncThunk<
+	any,
+	SearchUsersParams,
+	ThunkConfig<string>
+>('profile/searchUsers', async ({ search }, thunkApi) => {
+	const { rejectWithValue, extra } = thunkApi
 
-      try {
-         const res = await extra.api.get<getFetchSearchUsers>(`/search?username=${search}`)
+	try {
+		const res = await extra.api.get<getFetchSearchUsers>(
+			`/search?username=${search}`
+		)
 
-         return res.data.users
-
-      } catch (err: any) {
-         return rejectWithValue(err.response.data.msg)
-      }
-   }
-)
+		return res.data.users
+	} catch (err: any) {
+		return rejectWithValue(err.response.data.msg)
+	}
+})

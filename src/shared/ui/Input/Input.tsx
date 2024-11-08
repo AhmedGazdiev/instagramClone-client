@@ -1,31 +1,53 @@
-import { forwardRef, type FC, type InputHTMLAttributes } from 'react'
-import cls from './Input.module.scss'
+import { classNames, Mods } from '@/shared/lib/classNames'
 import { Text } from '@/shared/ui'
-import { Mods, classNames } from '@/shared/lib/classNames'
+import { forwardRef, ReactNode, type FC, type InputHTMLAttributes } from 'react'
+import cls from './Input.module.scss'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-   className?: string
-   error?: string
-   value: string
+interface InputProps
+	extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
+	className?: string
+	error?: string
+	value: string
+	textarea?: boolean
+	children?: ReactNode
 }
 
 export const Input: FC<InputProps> = forwardRef((props, ref: any) => {
-   const { className = '', value = '', error, placeholder, ...rest } = props
+	const {
+		className = '',
+		error,
+		value = '',
+		placeholder,
+		textarea = false,
+		...rest
+	} = props
 
-   const mods: Mods = {
-      [cls.active]: value,
-      [cls.errorField]: error
-   }
+	const mods: Mods = {
+		[cls.active]: value,
+		[cls.errorField]: error,
+		[cls.textareaActive]: textarea,
+	}
 
-   return (
-      <div className={classNames(cls.field, mods, [className])}>
-         <div className={cls.label}>
-            <input ref={ref} value={value} {...rest} />
+	return (
+		<div className={classNames(cls.field, mods, [className])}>
+			<div className={cls.label}>
+				{textarea ? (
+					<textarea ref={ref} defaultValue={value} {...rest} />
+				) : (
+					<input ref={ref} defaultValue={value} {...rest} />
+				)}
 
-            {placeholder && <Text as='span' className={cls.placeholder}>{placeholder}</Text>}
-         </div>
-
-         {error && <Text as='span' className={classNames(cls.error, { [cls.errorActive]: error }, [])}>{error}</Text>}
-      </div>
-   )
+				{placeholder && (
+					<Text as='span' className={cls.placeholder}>
+						{placeholder}
+					</Text>
+				)}
+			</div>
+			{error && (
+				<Text as='span' className={classNames(cls.error, mods, [])}>
+					{error}
+				</Text>
+			)}
+		</div>
+	)
 })

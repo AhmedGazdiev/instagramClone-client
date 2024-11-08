@@ -1,5 +1,12 @@
-.body{
-   width: 100%;
-   height: 500px;
-   background: var(--inverted-main-color);
+.body {
+	width: 100%;
+	max-width: 477px;
+	height: 500px;
+	background: var(--inverted-main-color);
+
+	img {
+		width: 100%;
+		height: 500px;
+		object-fit: cover;
+	}
 }
